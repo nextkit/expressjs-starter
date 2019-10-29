@@ -15,13 +15,13 @@ import logger from './util/logger';
  * @class App
  */
 export class App {
-  private app: Application;
-  private httpServer: Server;
+  private app: Application = express();
+  private httpServer: Server = new Server(this.app);
 
   /**
    * Initializes the express app and the http server with the passed controllers.
    *
-   * @param controllers
+   * @param {Controller[]} controllers
    */
   constructor(controllers: Controller[]) {
     this.initExpress();
@@ -32,10 +32,10 @@ export class App {
   }
 
   /**
-   * Starts the server.
+   * Start the server.
    */
   public start(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const port = process.env.PORT || 8080;
 
       // Start server.
@@ -47,10 +47,10 @@ export class App {
   }
 
   /**
-   * Connects to the mongoDB.
+   * Connect to the mongoDB.
    */
   private initDatabase(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const connection = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 
       mongoose.Promise = global.Promise;
@@ -78,10 +78,6 @@ export class App {
    * Setup the Application.
    */
   private initExpress(): void {
-    this.app = express();
-
-    this.httpServer = new Server(this.app);
-
     // Setup parser and helmet.
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -94,8 +90,11 @@ export class App {
     // Setup cors.
     const whitelisted = JSON.parse(process.env.WHITELIST || '["*"]');
     const corsOptions: cors.CorsOptions = {
-      origin: (origin: string, callback: (err: Error | null, allow?: boolean) => void): void => {
-        if (whitelisted.indexOf(origin) !== -1 || whitelisted.indexOf('*') !== -1) {
+      origin: (
+        requestOrigin: string | undefined,
+        callback: (err: Error | null, allow?: boolean) => void,
+      ): void => {
+        if (whitelisted.indexOf(requestOrigin) !== -1 || whitelisted.indexOf('*') !== -1) {
           callback(null, true);
         } else {
           callback(new BadRequestException({ error: 'Not allowed by CORS' }));
@@ -128,7 +127,7 @@ export class App {
   /**
    * Adds the controllers to the App.
    *
-   * @param {BaseController[]} controllers
+   * @param {Controller[]} controllers
    */
   private initControllers(controllers: Controller[]): void {
     controllers.forEach((controller: Controller) => {

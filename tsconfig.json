@@ -14,3 +14,28 @@
   },
   "include": ["src/**/*.ts"]
 }
+
+// {
+//   "compilerOptions": {
+//     "module": "commonjs",
+//     "esModuleInterop": true,
+//     "noImplicitAny": true,
+//     "moduleResolution": "node",
+//     "sourceMap": true,
+//     "outDir": "build",
+//     "baseUrl": ".",
+//     "paths": {
+//       "*": ["node_modules/*"]
+//     },
+//     "allowSyntheticDefaultImports": true,
+//     "experimentalDecorators": true,
+//     "isolatedModules": false,
+//     "resolveJsonModule": true,
+//     "jsx": "react",
+//     "lib": ["es6", "es2018.promise"],
+//     "noEmit": true,
+//     "strict": true,
+//     "target": "esnext"
+//   },
+//   "include": ["src/**/*.ts", "src/**/*.tsx"]
+// }
