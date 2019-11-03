@@ -1,4 +1,4 @@
-import { HttpException } from './';
+import { HttpException } from '.';
 
 export class GoneException extends HttpException {
   constructor(obj: any = null) {

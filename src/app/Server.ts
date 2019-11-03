@@ -3,7 +3,7 @@ import cors from 'cors';
 import express, { Application } from 'express';
 import expressPino from 'express-pino-logger';
 import helmet from 'helmet';
-import { Server } from 'http';
+import { Server as HttpServer } from 'http';
 import mongoose from 'mongoose';
 
 import { Controller } from './controllers';
@@ -12,11 +12,11 @@ import { ErrorMiddleware } from './middleware';
 import logger from './util/logger';
 
 /**
- * @class App
+ * @class Server
  */
-export class App {
+export class Server {
   private app: Application = express();
-  private httpServer: Server = new Server(this.app);
+  private httpServer: HttpServer = new HttpServer(this.app);
 
   /**
    * Initializes the express app and the http server with the passed controllers.
@@ -50,7 +50,7 @@ export class App {
    * Connect to the mongoDB.
    */
   private initDatabase(): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve): void => {
       const connection = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 
       mongoose.Promise = global.Promise;
@@ -61,9 +61,7 @@ export class App {
           useUnifiedTopology: true,
         })
         .then(() => {
-          logger.info(
-            `Connected to mongodb on ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
-          );
+          logger.info(`Connected to mongodb on ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
           resolve();
         })
         .catch((err: string) => {
@@ -90,10 +88,7 @@ export class App {
     // Setup cors.
     const whitelisted = JSON.parse(process.env.WHITELIST || '["*"]');
     const corsOptions: cors.CorsOptions = {
-      origin: (
-        requestOrigin: string | undefined,
-        callback: (err: Error | null, allow?: boolean) => void,
-      ): void => {
+      origin: (requestOrigin: string | undefined, callback: (err: Error | null, allow?: boolean) => void): void => {
         if (whitelisted.indexOf(requestOrigin) !== -1 || whitelisted.indexOf('*') !== -1) {
           callback(null, true);
         } else {

@@ -91,9 +91,11 @@ docs/
 # IDE folder
 .idea/
 
-# Real config file
-config.js
-
+# Build folder
 build/
 
+# JWT Keys folder
 keys/
+
+# Lock file
+yarn.lock

@@ -1,4 +1,6 @@
-import { Router } from 'express';
+import { Request, Router } from 'express';
+import { validationResult } from 'express-validator';
+import { BadRequestException } from '../exceptions';
 
 /**
  * @class Controller
@@ -6,16 +8,17 @@ import { Router } from 'express';
  * Abstract class to extends for the other controllers.
  * Contains the routing logic for the API.
  */
-export abstract class Controller {
+export default abstract class Controller {
+  protected router: Router;
+
   private pathPrefix: string;
-  private router: Router;
 
   /**
    * Creates the controller and adds the endpoints to the router.
    *
    * @param pathPrefix of the endpoint
    */
-  constructor(pathPrefix: string) {
+  protected constructor(pathPrefix: string) {
     this.pathPrefix = pathPrefix;
     this.router = Router();
 
@@ -34,6 +37,18 @@ export abstract class Controller {
    */
   public getPathPrefix(): string {
     return this.pathPrefix;
+  }
+
+  /**
+   * Checks if the request has any errors.
+   *
+   * @param req
+   */
+  protected checkErrors(req: Request): void {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      throw new BadRequestException({ errors: errors.array() });
+    }
   }
 
   /**

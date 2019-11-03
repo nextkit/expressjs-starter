@@ -1,4 +1,4 @@
-import { HttpException } from './';
+import { HttpException } from '.';
 
 export class InternalServerErrorException extends HttpException {
   constructor(obj: any = null) {

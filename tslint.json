@@ -6,7 +6,8 @@
     "trailing-comma": [true],
     "no-console": [false],
     "no-floating-promises": false,
-    "quotemark": false
+    "quotemark": false,
+    "member-ordering": false
   },
   "rulesDirectory": []
 }
