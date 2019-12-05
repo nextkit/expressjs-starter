@@ -12,7 +12,7 @@ $ yarn install
 
 Then rename the `example.env` file to `.env`
 
-Then run the development server. (Make sure you (generated the JWT keys)[JWT key generating])
+Then run the development server. (Make sure you [generated the JWT keys](#jwt-key-gen))
 
 ```console
 $ yarn dev
@@ -38,7 +38,7 @@ First build the project for running the server in production
 $ yarn build
 ```
 
-## JWT key generating
+## <a name="jwt-key-gen"></a> JWT key generating
 
 Your keys can be saved anywhere but I always create the folder `keys` and put them there. Here is an example.
 
