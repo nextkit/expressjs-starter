@@ -24,7 +24,6 @@ export interface IJwtRequest extends Request {
  * @class JwtAction.
  */
 export default class JwtAction {
-
   /**
    * Generates a jsonwebtoken.
    *
