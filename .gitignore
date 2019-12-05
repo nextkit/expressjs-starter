@@ -82,7 +82,7 @@ yarn-lock.json
 .dynamodb/
 
 # Local mongodb folder
-.mongodb/
+.mongodb/*
 !.mongodb/.gitkeep
 
 # Generated documents
