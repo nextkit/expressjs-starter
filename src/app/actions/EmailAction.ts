@@ -25,7 +25,7 @@ export default class EmailAction {
   public static async sendAccountVerification(
     username: string,
     emailAddress: string,
-    verificationCode: string
+    verificationCode: string,
   ): Promise<void> {
     let template = await fs.readFileSync(`./src/assets/templates/email/verify-email.template.html`, 'utf8');
 

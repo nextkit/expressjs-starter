@@ -8,12 +8,10 @@ import { BadRequestException, ConflictException } from '../exceptions';
 import { User } from '../models';
 import Controller from './Controller';
 
-
 /**
  * @class UserController
  */
 export default class UserController extends Controller {
-
   private readonly PASSWORD_LENGTH: number = 6;
 
   constructor() {
@@ -58,22 +56,30 @@ export default class UserController extends Controller {
     // Protected routes.
     this.router.use(authJwt(JwtAction.getConfig()));
 
-    this.router.delete('/', [
-      body('password')
-        .exists()
-        .isLength({ min: this.PASSWORD_LENGTH })
-        .trim(),
-    ], this.delete);
-    this.router.patch('/', [
-      body('newPassword')
-        .exists()
-        .isLength({ min: this.PASSWORD_LENGTH })
-        .trim(),
-      body('password')
-        .exists()
-        .isLength({ min: this.PASSWORD_LENGTH })
-        .trim(),
-    ], this.update);
+    this.router.delete(
+      '/',
+      [
+        body('password')
+          .exists()
+          .isLength({ min: this.PASSWORD_LENGTH })
+          .trim(),
+      ],
+      this.delete,
+    );
+    this.router.patch(
+      '/',
+      [
+        body('newPassword')
+          .exists()
+          .isLength({ min: this.PASSWORD_LENGTH })
+          .trim(),
+        body('password')
+          .exists()
+          .isLength({ min: this.PASSWORD_LENGTH })
+          .trim(),
+      ],
+      this.update,
+    );
   }
 
   /**
@@ -100,7 +106,7 @@ export default class UserController extends Controller {
         throw new ConflictException({ errors: [{ param: 'email' }] });
       }
       if (!(await user.usernameValid())) {
-        throw new ConflictException({  errors: [{ param: 'username' }]  });
+        throw new ConflictException({ errors: [{ param: 'username' }] });
       }
 
       await user.save();
