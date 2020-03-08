@@ -1,6 +1,6 @@
-# backend-starter
+# expressjs-starter
 
-Starter project for all of the backends.
+Starter project for an expressjs backend with mongodb.
 
 ## Getting started
 
