@@ -1,7 +1,7 @@
 {
-  "name": "backend-starter",
+  "name": "expressjs-starter",
   "version": "1.0.0",
-  "description": "A starter project for the expressjs backend",
+  "description": "A starter project for the expressjs backend with mongodb",
   "main": "build/index.js",
   "scripts": {
     "mongo": "mongod --dbpath ./.mongodb",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nextkit/backend-starter.git"
+    "url": "git+https://github.com/nextkit/expressjs-starter.git"
   },
   "keywords": [
     "starter",
@@ -30,9 +30,9 @@
   "author": "Next Kit",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nextkit/backend-starter/issues"
+    "url": "https://github.com/nextkit/expressjs-starter/issues"
   },
-  "homepage": "https://github.com/nextkit/backend-starter#readme",
+  "homepage": "https://github.com/nextkit/expressjs-starter#readme",
   "dependencies": {
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
@@ -79,7 +79,6 @@
     "should": "^13.2.3",
     "supertest": "^4.0.2",
     "ts-node": "^8.3.0",
-    "ts-node-dev": "^1.0.0-pre.43",
     "tslint": "^5.20.0",
     "typedoc": "^0.15.0",
     "typescript": "^3.5.3"
