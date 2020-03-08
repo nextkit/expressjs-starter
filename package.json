@@ -5,12 +5,12 @@
   "main": "build/index.js",
   "scripts": {
     "mongo": "mongod --dbpath ./.mongodb",
-    "test": "./node_modules/.bin/cucumber-js --require test/steps --require test/hooks.js test",
+    "test": "./node_modules/.bin/cucumber-js --require __test__/steps --require __test__/hooks.js __test__",
     "clean": "rimraf build/*",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "tsc": "tsc",
     "build": "npm-run-all clean lint tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly src/index.ts",
+    "dev": "nodemon src/index.ts",
     "start": "node .",
     "format": "prettier --write 'src/**/*.{ts,tsx}'"
   },
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/servular/backend-starter.git"
+    "url": "git+https://github.com/nextkit/backend-starter.git"
   },
   "keywords": [
     "starter",
@@ -27,12 +27,12 @@
     "nodejs",
     "backend"
   ],
-  "author": "servular",
+  "author": "Next Kit",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/servular/backend-starter/issues"
+    "url": "https://github.com/nextkit/backend-starter/issues"
   },
-  "homepage": "https://github.com/servular/backend-starter#readme",
+  "homepage": "https://github.com/nextkit/backend-starter#readme",
   "dependencies": {
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
@@ -70,7 +70,7 @@
     "cucumber": "^6.0.5",
     "husky": "^3.0.9",
     "mongodb": "^3.3.5",
-    "nodemon": "^1.18.10",
+    "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
     "pino-pretty": "^3.2.2",
     "pino-tee": "^0.2.2",

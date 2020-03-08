@@ -1,9 +1,9 @@
 import { Request } from 'express';
 import fs from 'fs';
-import jsonwebtoken from 'jsonwebtoken';
+import jsonwebtoken, { Algorithm } from 'jsonwebtoken';
 
 // Read keys.
-const publicCert = fs.readFileSync(process.env.JWT_PUBLIC_KEY || 'keys/jwt.pub.key');
+const publicCert = fs.readFileSync(process.env.JWT_PUBLIC_KEY || 'keys/jwt.public.key');
 const privateCert = fs.readFileSync(process.env.JWT_PRIVATE_KEY || 'keys/jwt.private.key', 'utf8');
 
 export interface IJwtConfig {
@@ -34,7 +34,7 @@ export default class JwtAction {
    */
   public static async token(data: IJwtData, subject: string): Promise<string> {
     const token = await jsonwebtoken.sign(data, privateCert, {
-      algorithm: process.env.JWT_ALGORITHM || 'RS512',
+      algorithm: (process.env.JWT_ALGORITHM as Algorithm) || 'RS512',
       expiresIn: process.env.JWT_EXPIRES_IN || '1d',
       issuer: process.env.JWT_ISSUER || 'dummy_issuer',
       subject,

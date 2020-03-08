@@ -201,7 +201,6 @@ export default class UserController extends Controller {
 
       const result = await bcrypt.compare(password, user.password);
 
-      console.log(result);
       if (!result) {
         return next(new BadRequestException());
       }
