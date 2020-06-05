@@ -7,3 +7,5 @@ import { Server } from './app/Server';
 const app = new Server([new UserController()]);
 
 app.start();
+
+export default app;

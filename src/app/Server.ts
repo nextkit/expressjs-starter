@@ -35,7 +35,7 @@ export class Server {
    * Start the server.
    */
   public start(): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const port = process.env.PORT || 8080;
 
       // Start server.
@@ -131,5 +131,12 @@ export class Server {
 
     // Setup error middleware.
     this.app.use(ErrorMiddleware.handle);
+  }
+
+  /**
+   * @returns instance of the express app.
+   */
+  public getExpressApp(): Application {
+    return this.app;
   }
 }
