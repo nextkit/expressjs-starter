@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/nextkit/expressjs-starter#readme",
   "dependencies": {
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
